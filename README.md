@@ -11,8 +11,9 @@ flat symlink views generated from every `plugins/*/skills/*/SKILL.md` file:
 
 - GitHub Copilot: `~/.copilot/skills`
 - Claude Code: `~/.claude/skills`
+- Antigravity: `~/.gemini/config/skills`
 
-After cloning or changing the skill layout, rebuild both views with:
+After cloning or changing the skill layout, rebuild all views with:
 
 ```bash
 ./scripts/link-user-skills.sh

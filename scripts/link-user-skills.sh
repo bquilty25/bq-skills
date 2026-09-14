@@ -6,6 +6,7 @@ repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 backup_root="${HOME}/.ai-skills-backups/$(date +%Y%m%d_%H%M%S)"
 copilot_skills="${HOME}/.copilot/skills"
 claude_skills="${HOME}/.claude/skills"
+antigravity_skills="${HOME}/.gemini/config/skills"
 staging_root="$(mktemp -d "${TMPDIR:-/tmp}/link-user-skills.XXXXXX")"
 
 trap 'rm -rf "${staging_root}"' EXIT
@@ -28,7 +29,7 @@ if [[ -n "${duplicate_names}" ]]; then
   exit 1
 fi
 
-for client in copilot claude; do
+for client in copilot claude antigravity; do
   mkdir -p "${staging_root}/${client}-skills"
   while IFS=$'\t' read -r skill_name skill_dir; do
     ln -s "${skill_dir}" "${staging_root}/${client}-skills/${skill_name}"
@@ -37,11 +38,13 @@ done
 
 mkdir -p "${backup_root}"
 
-for client in copilot claude; do
+for client in copilot claude antigravity; do
   if [[ "${client}" == copilot ]]; then
     target="${copilot_skills}"
-  else
+  elif [[ "${client}" == claude ]]; then
     target="${claude_skills}"
+  else
+    target="${antigravity_skills}"
   fi
 
   mkdir -p "$(dirname "${target}")"
@@ -51,5 +54,5 @@ for client in copilot claude; do
   mv "${staging_root}/${client}-skills" "${target}"
 done
 
-printf 'Linked %d skills for Copilot and Claude.\n' "${skill_count}"
+printf 'Linked %d skills for Copilot, Claude, and Antigravity.\n' "${skill_count}"
 printf 'Previous skill directories backed up to %s\n' "${backup_root}"
