@@ -394,6 +394,72 @@ Poor: "The approach uses a hierarchical Bayesian framework with conjugate priors
 Better: "We used Bayesian hierarchical modelling with conjugate prior distributions"
 ```
 
+## AI-Generated Writing Tells
+
+When writing or reviewing prose, actively scan for and remove patterns
+that signal AI-generated text. These undermine credibility with editors
+and reviewers.
+
+### Paragraph Structure
+
+Do not open every paragraph with a short, punchy declarative sentence
+followed by elaboration. This "topic sentence + expansion" template,
+repeated across paragraphs, is one of the most recognisable AI tells.
+
+**Vary paragraph openings:**
+
+- Mix sentence lengths: some paragraphs should open with a longer,
+  compound sentence that sets context and claim together.
+- Use conditional or temporal clauses to enter a paragraph ("When a
+  highly cited paper contains...", "In April 2026, Anthropic
+  announced...") rather than always leading with a declaration.
+- Fold the topic claim into the body of the paragraph rather than
+  isolating it as a standalone opener.
+
+```
+AI pattern (every paragraph):
+  "This is important. [elaboration]"
+  "The tools already exist. [elaboration]"
+  "The consequences compound. [elaboration]"
+
+Better: vary the entry point, length, and grammatical structure of each
+opening so no two consecutive paragraphs begin the same way.
+```
+
+### Rhetorical Patterns to Remove
+
+- **Tricolon lists** as a rhetorical flourish: "reading code, tracing
+  data flow, and reasoning about logical correctness" used for emphasis
+  rather than precision. If the list is informative, keep it; if it is
+  rhythmic, cut or restructure it.
+- **Anaphoric repetition**: "sometimes X, sometimes Y" or "not just X,
+  but Y". Use plain connectives instead.
+- **Self-referential meta-commentary**: "a finding that is itself a
+  measure of..." Let the evidence speak without narrating its
+  significance.
+- **Dramatic one-sentence paragraph openers**: "The consequences
+  compound." These read as editorial rather than analytical.
+- **Tidy wrap-up sentences**: "The resulting scientific record will be
+  more reliable." Prefer conditional or qualified closings that reflect
+  the actual state of evidence.
+- **Telling the reader how to feel**: "We should be worried" or
+  "What they find is unlikely to be reassuring." State consequences
+  and let the reader draw their own conclusion.
+
+### Register Consistency
+
+- **Measured over dramatic.** Prefer "may need re-examination" over
+  "becomes suspect"; "is instructive" over "illustrates the scale of
+  potential harm"; "could, in principle, have identified" over "could
+  have flagged in minutes."
+- **Conditional over declarative** for forward-looking claims. Use "if
+  these tools are adopted widely" rather than asserting outcomes as
+  certain.
+- **Cut filler adverbs**: "directly", "just", "simply", "merely" rarely
+  add meaning. Remove unless they disambiguate.
+- **Avoid formulaic metaphors**: "a tangle of", "a flood of", "a
+  landscape of". Use plain description.
+
 ## Common Writing Issues
 
 ### Overused Qualifiers
