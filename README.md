@@ -6,7 +6,7 @@ an upstream source and adds locally maintained and imported skills.
 
 ## Local discovery
 
-The canonical checkout is `~/.copilot/shared/seabbs-skills`. Both clients use
+The canonical checkout is `~/.copilot/shared/bq-skills`. Both clients use
 flat symlink views generated from every `plugins/*/skills/*/SKILL.md` file:
 
 - GitHub Copilot: `~/.copilot/skills`
