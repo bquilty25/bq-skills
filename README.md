@@ -1,10 +1,9 @@
 # bq-skills
 
-Private source of truth for personal AI skills, user-level instructions and
-Claude Code hooks, used by Claude Code (the primary client), GitHub Copilot
-and Antigravity. The repository started as a fork of the public
-[`seabbs/skills`](https://github.com/seabbs/skills), kept as the `upstream`
-remote, and adds personal and imported skills.
+Repository of skills, user-level instructions and Claude Code hooks, used by
+Claude Code (the primary client), GitHub Copilot and Antigravity. It started
+as a fork of [`seabbs/skills`](https://github.com/seabbs/skills), kept as the
+`upstream` remote, and adds personal and imported skills.
 
 ## Layout
 
