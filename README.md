@@ -29,7 +29,8 @@ git remote add upstream https://github.com/seabbs/skills.git
 ./scripts/link-user-skills.sh
 ```
 
-The link script builds flat symlink views from every
+then install the [plugins from other
+marketplaces](#claude-code-plugins-from-other-marketplaces). The link script builds flat symlink views from every
 `plugins/*/skills/*/SKILL.md` file:
 
 - Claude Code: `~/.claude/skills`
@@ -78,7 +79,32 @@ install.
   (a sound when Claude Code needs the user); merge it into that file on a new
   machine.
 
-## Plugins
+## Claude Code plugins from other marketplaces
+
+These are installed through Claude Code's plugin system rather than kept in
+this repository, so that they update from their sources. They are Claude Code
+only.
+
+| Plugin | Marketplace | Provides |
+|---|---|---|
+| `ccgh-idd-standards` | [`ccgh-idd/ccgh-idd-skills`](https://github.com/ccgh-idd/ccgh-idd-skills) | `/ccgh-idd-standards:r-analysis-standards`: CCGH R analysis standards (`here`, `purrr`, `qs`, project layout, locking data folders against agent reads) |
+| `impeccable` | [`pbakaus/impeccable`](https://github.com/pbakaus/impeccable) | `/impeccable:impeccable`: frontend design, critique and polish, with four subagents (asset producer, documenter, finish reviewer, manual edit applier) |
+| `clangd-lsp` | [`anthropics/claude-plugins-official`](https://github.com/anthropics/claude-plugins-official) | C and C++ language server (no skills) |
+
+To install them on a new machine:
+
+```bash
+claude plugin marketplace add ccgh-idd/ccgh-idd-skills
+claude plugin marketplace add pbakaus/impeccable
+claude plugin install ccgh-idd-standards@ccgh-idd-skills
+claude plugin install impeccable@impeccable
+claude plugin install clangd-lsp@claude-plugins-official
+```
+
+Skills enabled on claude.ai sync into `~/.claude/skills/synced/` on their own
+and are not tracked here.
+
+## Plugins in this repository
 
 | Plugin | Skills | Description |
 |---|---|---|
