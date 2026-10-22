@@ -21,7 +21,17 @@ After cloning or changing the skill layout, rebuild all views with:
 
 The script checks for duplicate skill names, builds both views before changing
 the live directories, and stores the previous directories under
-`~/.ai-skills-backups/`.
+`~/.ai-skills-backups/`. Entries in a live directory that are not symlinks
+(e.g. Claude Code's `synced/` folder) are carried over to the new view.
+
+## User-level instructions
+
+`claude/CLAUDE.md` holds the user-level instructions (writing style, file
+editing, R analysis and Quarto conventions). Claude Code is the primary client:
+the link script points `~/.claude/CLAUDE.md` at this file, and points
+`~/.copilot/instructions/claude.instructions.md` at
+`claude/copilot.instructions.md`, a wrapper that applies it to every file in
+Copilot.
 
 Repository-local skills remain in their owning project when they depend on
 project-specific files or workflows.

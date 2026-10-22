@@ -1,5 +1,5 @@
 ---
-name: working-on
+name: posit-dev-working-on
 description: "Set a tracking document as the source of truth for the current feature or task. Use when starting work on a feature, bug fix, or multi-step task that benefits from a persistent record of decisions, discoveries, and progress. Keeps the document updated as work proceeds."
 disable-model-invocation: true
 arguments: [path]

@@ -48,11 +48,31 @@ for client in copilot claude antigravity; do
   fi
 
   mkdir -p "$(dirname "${target}")"
+  # carry over entries that are not skill links (e.g. Claude Code's synced/)
+  if [[ -d "${target}" ]]; then
+    for entry in "${target}"/* "${target}"/.[!.]*; do
+      [[ -e "${entry}" && ! -L "${entry}" ]] || continue
+      [[ -e "${staging_root}/${client}-skills/$(basename "${entry}")" ]] && continue
+      cp -R "${entry}" "${staging_root}/${client}-skills/"
+    done
+  fi
   if [[ -e "${target}" ]]; then
     mv "${target}" "${backup_root}/${client}-skills"
   fi
   mv "${staging_root}/${client}-skills" "${target}"
 done
 
+for instructions in "${HOME}/.claude/CLAUDE.md" \
+  "${HOME}/.copilot/instructions/claude.instructions.md"; do
+  mkdir -p "$(dirname "${instructions}")"
+  if [[ -e "${instructions}" && ! -L "${instructions}" ]]; then
+    mv "${instructions}" "${backup_root}/$(basename "${instructions}")"
+  fi
+done
+ln -sfn "${repo_root}/claude/CLAUDE.md" "${HOME}/.claude/CLAUDE.md"
+ln -sfn "${repo_root}/claude/copilot.instructions.md" \
+  "${HOME}/.copilot/instructions/claude.instructions.md"
+
 printf 'Linked %d skills for Copilot, Claude, and Antigravity.\n' "${skill_count}"
+printf 'Linked user-level instructions (claude/CLAUDE.md).\n'
 printf 'Previous skill directories backed up to %s\n' "${backup_root}"
