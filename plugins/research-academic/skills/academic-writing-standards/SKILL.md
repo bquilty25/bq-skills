@@ -79,19 +79,29 @@ Better: "The method combines daily surveillance data with laboratory reports to 
 
 ### Cross-references to Tables and Figures
 
+**Every table and figure must be cited in the text**, at the sentence that
+states a finding it supports. A table or figure that no sentence cites either
+needs a sentence stating what it adds, or should be cut or moved to a
+supplement. When reviewing, list every table and figure label and check that
+each is cited at least once.
+
 **Never use positional references** ("above", "below", "the following table",
 "as shown below"). Always cross-reference a specific numbered table or figure.
 
 ```
 Avoid: "The results reported below describe field-level agreement."
-Better: "Field-level agreement is reported in @tbl-variable-f1."
+Better: "Field-level agreement ranged from 80% to 100% (@tbl-variable-f1)."
 ```
 
-**State the result first, cite the table or figure in parentheses.** Do not
-use "Table X shows" or "Figure Y illustrates" as sentence subjects. The
-figure/table is not the actor; the finding is.
+**State the result first, cite the table or figure in parentheses.** Never
+make the table or figure the subject of the sentence: no "Table X shows",
+"Figure Y illustrates", "as seen in Figure 1", or "is reported in Table 2".
+The figure/table is not the actor; the finding is.
 
 ```
+Avoid: "Figure 1 shows the proportion of people vaccinated by health zone."
+Better: "Between 2% and 21% of people were vaccinated, depending on the health zone (@fig-coverage)."
+
 Avoid: "Table 2 shows that GPT-5 achieved 90% recall."
 Better: "GPT-5 achieved 90% recall (@tbl-case-performance)."
 
