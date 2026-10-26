@@ -186,6 +186,7 @@ and are not tracked here.
 | Skill | Description |
 |---|---|
 | `/github-dashboard` | Notifications, PR status, issue triage |
+| `/issue-create` | Draft and open GitHub issues from the conversation or a list, after confirmation |
 | `/issue-summary` | Summarise a GitHub issue conversation |
 | `/issue-reply` | Post a helpful reply to a GitHub issue |
 | `/repo-summary` | Repository overview with activity metrics |
