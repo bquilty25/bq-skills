@@ -38,7 +38,7 @@ Never commit patient-identifiable or otherwise sensitive data. Keep `README.md` 
 
 The first chunk loads packages and sources functions; later chunks import with `here`, process with sourced functions and `dplyr` (saving with `qs`), analyse with `dplyr` and `purrr`, and report with `ggplot2` and inline code.
 
-When writing Quarto documents, follow these priorities in order: 1) **Structure**: IMRaD (Abstract, Introduction, Methods, Results, Discussion with a concluding paragraph). 2) **Language**: UK English, prose paragraphs, no bullet points or lists. 3) **Voice**: precise and analytical scientific prose. 4) **Results section**: state findings only; all interpretation and commentary belongs in the Discussion.
+When writing Quarto documents, follow these priorities in order: 1) **Structure**: IMRaD (Abstract, Introduction, Methods, Results, Discussion with a concluding paragraph). 2) **Language**: UK English, prose paragraphs, no bullet points or lists. 3) **Voice**: precise and analytical scientific prose. 4) **Results section**: state findings only; all interpretation and commentary belongs in the Discussion. When creating or restructuring an analysis report, apply the `quarto-epi-report` skill.
 
 **Register**: plain, measured scientific prose that matches the existing text. State findings directly and hedge where the evidence is limited. Do not use rhetorical questions, figurative or conversational phrasing, dramatic paragraph openers, or aphoristic closing sentences. When editing, preserve the author's wording and restructure or trim rather than restyle, unless explicitly asked to rewrite. When writing or editing manuscripts, apply the `academic-writing-standards` skill.
 
