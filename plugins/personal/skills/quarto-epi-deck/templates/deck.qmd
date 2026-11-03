@@ -1,0 +1,121 @@
+---
+# Epicentre deck template (quarto-epi-deck). Replace every <...>, add the deck
+# to the render list of _quarto.yml and its results prefixes to the project's
+# registry of report dates, then delete these comments.
+title: "<What the deck covers, without commas>"
+subtitle: "<Data and scope, in one line>"
+format:
+  pptx:
+    # The Epicentre template, its layouts renamed for pandoc
+    # (templates/build_reference_pptx.py); path relative to this deck
+    reference-doc: ../templates/epicentre_reference.pptx
+    slide-level: 2
+    monofont: Consolas
+date: last-modified
+date-format: "D MMMM YYYY"
+execute:
+  echo: false
+  warning: false
+  message: false
+params:
+  res_date: "latest"
+  results_dir: "output/fits"
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+pacman::p_load(
+  rio, here,
+  tidyverse
+)
+
+# Summarises qmd/<topic>/<topic>.qmd; fits nothing and reads only the
+# aggregate results of scripts/<topic>/<topic>.R. Text through showtext in
+# the template's font
+source(here("R", "report_tables.R"))
+source(here("R", "report_figures.R"))
+knitr::opts_chunk$set(fig.showtext = TRUE)
+slide_font <- epi_font()
+
+res_dir <- here(params$results_dir)
+source(here("R", "report_dates.R"))
+dates <- resolve_dates(params, res_dir, "<topic>_slides")
+file <- file.path(res_dir, paste0("res_<topic>_", dates$res_date, ".rds"))
+stopifnot("Run scripts/<topic>/<topic>.R first" = file.exists(file))
+r <- import(file)
+stopifnot(all(c("sources", "<element>") %in% names(r)))
+data_label <- format(as.Date(dates$res_date), "%d %B %Y")
+
+pct <- function(x) sub("-", "−", sprintf("%.0f%%", round(x) + 0), fixed = TRUE)
+num <- function(x) scales::comma(x, accuracy = 1)
+ci <- function(est, lo, hi) sprintf("%s (%s to %s)", pct(est), pct(lo), pct(hi))
+one_row <- function(d, ...) {
+  out <- filter(d, ...)
+  stopifnot(nrow(out) == 1)
+  out
+}
+
+# ggplot theme for slides
+theme_slide <- theme_minimal(base_size = 14, base_family = slide_font) +
+  theme(
+    legend.position = "top", panel.grid.minor = element_blank(),
+    strip.text = element_text(face = "bold")
+  )
+
+# Tables drawn as images (pandoc's PowerPoint tables cannot be sized), in
+# the template's font with the Epicentre header blue
+slide_table <- function(dat, left = 1, size = 13) {
+  dat <- mutate(dat, across(everything(), as.character))
+  ft <- flextable::flextable(dat) |>
+    flextable::font(fontname = slide_font, part = "all") |>
+    flextable::fontsize(size = size, part = "all") |>
+    flextable::bold(part = "header") |>
+    flextable::color(color = "#2E569E", part = "header") |>
+    flextable::align(j = seq_len(left), align = "left", part = "all") |>
+    flextable::align(j = setdiff(seq_along(dat), seq_len(left)), align = "right", part = "all") |>
+    flextable::border_remove() |>
+    flextable::hline_top(border = officer::fp_border(color = "#2E569E", width = 1.5), part = "all") |>
+    flextable::hline_bottom(border = officer::fp_border(color = "#2E569E", width = 1.5), part = "body") |>
+    flextable::autofit()
+  plot(flextable::gen_grob(ft, fit = "auto", just = "center"))
+}
+
+# Assertions any bullet relies on without its numbers
+# stopifnot(<condition>)
+```
+
+## Data used
+
+- <Dataset> uploaded on `r data_label`
+- <Definitions the deck relies on>
+- Rendered on `r format(Sys.Date(), "%d %B %Y")`
+
+## <First finding stated as a sentence without commas>
+
+- <Headline estimate with its interval, inline R>
+- <The one contrast it rests on>
+- <Qualification, if any>
+
+```{r}
+#| label: <finding-1>
+#| fig-width: 13
+#| fig-height: 4.2
+# r$<element> |> ... |> ggplot(...) + theme_slide
+```
+
+## <Next finding>
+
+- <...>
+
+## Limitations
+
+- <Each with the direction of the bias it could cause>
+
+## Take-home
+
+- <Conclusion 1>
+- <Conclusion 2>
+- Next:
+  - <What is needed and from whom>

@@ -1,0 +1,148 @@
+---
+# Epicentre report template (quarto-epi-report). Replace every <...>, add the
+# document to the render list of _quarto.yml and its results prefix to the
+# project's registry of report dates, then delete these comments.
+title: "<Finding-led title without commas>"
+subtitle: "<What the report covers, in one line>. Epicentre, Paris"
+footer: Epicentre - Médecins Sans Frontières
+format:
+  epitemplates-report-html:
+    grid:
+      body-width: 1000px
+    include-in-header:
+      text: |
+        <style>
+          body { font-size: 1.1rem; }
+          a, a:visited, a.quarto-xref { color: #1f5bb5 !important; }
+          h1.title { font-size: 2rem !important; line-height: 1.2 !important; }
+          .subtitle, p.subtitle { font-size: 1.05rem !important; line-height: 1.4 !important; }
+          .quarto-title-banner { padding-top: 1rem !important; padding-bottom: 1rem !important; }
+        </style>
+  epitemplates-report-docx: default
+date: last-modified
+date-format: long
+toc: true
+number-sections: true
+# Paths relative to this document (one level down in qmd/<topic>/)
+bibliography: ../references.bib
+csl: ../the-lancet.csl
+link-citations: true
+execute:
+  echo: false
+  warning: false
+  message: false
+params:
+  # "latest": the newest results in results_dir; a date pins the document
+  res_date: "latest"
+  results_dir: "output/fits"
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+pacman::p_load(
+  rio, here,
+  gt,
+  tidyverse
+)
+
+# Tables (epi_gt()) and figures (epi_font(), forest_ve()) in the template's
+# font. This document fits nothing and reads only the aggregate results of
+# scripts/<topic>/<topic>.R
+source(here("R", "report_tables.R"))
+source(here("R", "report_figures.R"))
+knitr::opts_chunk$set(fig.showtext = TRUE)
+
+res_dir <- here(params$results_dir)
+source(here("R", "report_dates.R"))
+dates <- resolve_dates(params, res_dir, "<topic>")
+file <- file.path(res_dir, paste0("res_<topic>_", dates$res_date, ".rds"))
+stopifnot("Run scripts/<topic>/<topic>.R first" = file.exists(file))
+r <- import(file)
+stopifnot(all(c("sources", "<element>") %in% names(r)))
+data_label <- format(as.Date(dates$res_date), "%d %B %Y")
+src <- r$sources
+
+# rounded first, so that a small negative value is not shown as −0%
+pct <- function(x, digits = 0) {
+  sub("-", "−", sprintf(paste0("%.", digits, "f%%"), round(x, digits) + 0), fixed = TRUE)
+}
+num <- function(x) scales::comma(x, accuracy = 1)
+ci <- function(est, lo, hi) sprintf("%s (%s to %s)", pct(est), pct(lo), pct(hi))
+pval <- function(p) {
+  case_when(is.na(p) ~ "not testable", p < 0.001 ~ "p < 0.001", .default = sprintf("p = %.3f", p))
+}
+# the single row of `d` matching the filters, or an error
+one_row <- function(d, ...) {
+  out <- filter(d, ...)
+  stopifnot(nrow(out) == 1)
+  out
+}
+
+# One helper per quantity the text cites, built on one_row(), for example
+# ve_txt <- function(pop) with(one_row(r$ve, population == pop), ci(ve_q50, ve_q025, ve_q975))
+
+# Assertions the text relies on (patterns stated without their numbers)
+# stopifnot(<condition>)
+```
+
+# Summary
+
+**Background** <What is known, what is missing, in two or three sentences.>
+
+**Methods** <Design, data, populations, exposure and outcome, main model.>
+
+**Results** <The main estimates with their intervals and the one contrast that matters most; inline R only.>
+
+**Conclusions** <What the reader should take away, hedged to the evidence.>
+
+# Introduction
+
+<What is known, with references; what is missing and why it matters.> In this study, we aimed to <aim>.
+
+# Methods
+
+## Study design
+
+## Data sources
+
+We used <dataset> uploaded on `r data_label` (`r src$<file>`).
+
+## Study populations
+
+## Statistical analysis
+
+# Results
+
+## <First question>
+
+<One to three numbers per paragraph, the rest in the table or figure (@tbl-<label>; @fig-<label>).>
+
+```{r}
+#| label: tbl-<label>
+#| tbl-cap: "<What is counted, among whom, and what each cell holds.>"
+# r$<element> |> ... |> epi_gt(groupname_col = "<group>", notes = "<definitions and abbreviations>")
+```
+
+```{r}
+#| label: fig-<label>
+#| fig-cap: "<Who each panel, row and colour holds; whether groups are nested or the same people; what the marks, labels and axis mean.>"
+#| fig-width: 10
+#| fig-height: 5
+# r$<element> |> ... |> forest_ve(...)
+```
+
+# Discussion
+
+We found that <main finding with its headline number>.
+
+<Comparison with other evidence, each statement referenced.>
+
+Our study has several strengths. <...>
+
+Our study has several limitations. First, <limitation, direction of bias, what would resolve it>. Second, <...>
+
+Overall, we found that <conclusion and its consequence for the reader>.
+
+# References
