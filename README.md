@@ -107,8 +107,8 @@ and are not tracked here.
 
 | Plugin | Skills | Description |
 |---|---|---|
-| `personal` | 5 | Own skills: writing, diagrams, Quarto reporting, refactoring |
-| `research-academic` | 8 | Paper analysis, literature search, preprints, grants, minutes |
+| `personal` | 6 | Own skills: writing, diagrams, Quarto reports and decks, refactoring |
+| `research-academic` | 10 | Paper analysis, literature search, preprints, grants, minutes, analysis critique, red team |
 | `lang-r` | 1 | R package development (devtools, testthat, roxygen2) |
 | `lang-julia` | 1 | Julia package development (SciML standards) |
 | `lang-stan` | 1 | Stan probabilistic programming (cmdstanr) |
@@ -120,7 +120,7 @@ and are not tracked here.
 | `pi` | 1 | Delegate tasks to a local coding agent |
 | `claude-imported` | 26 | Skills imported from Posit, r-lib, Quarto, Shiny and others |
 
-**Total: 83 skills across 12 plugins**
+**Total: 86 skills across 12 plugins**
 
 ## All skills
 
@@ -131,7 +131,8 @@ and are not tracked here.
 | `/unslop` | Cut AI tells from any writing |
 | `/diagram-design` | Design language for hand-authored SVG schematics (study designs, flows, timelines) |
 | `/quarto-dynamic-reporting` | Inline R for every result in Quarto documents |
-| `/quarto-epi-report` | Build an epidemiological Quarto report: results script, text helpers, captions that explain groups, fixed IMRaD structure, render checks |
+| `/quarto-epi-report` | Build an Epicentre epidemiological Quarto report: results script, epitemplates formats, the few numbers each claim needs, captions that explain groups, fixed IMRaD structure, render checks |
+| `/quarto-epi-deck` | Build an Epicentre slide deck in Quarto: PowerPoint in the Epicentre template, reads the report's results, one finding per slide, figures and tables sized for slides, take-home, render checks |
 | `/refactor` | Refactor to project standards without changing behaviour |
 
 ### research-academic
@@ -146,6 +147,8 @@ and are not tracked here.
 | `/grant-application-setup` | Set up grant application repositories |
 | `/grant-compliance-checking` | Check work against grant requirements |
 | `/minutes` | Create meeting minutes from a transcript |
+| `/analysis-critique` | A senior professor reviews an analysis, report or deck: issues ranked by how much they could change the conclusion, each with the check that would settle it |
+| `/red-team` | Try to break an analysis's main conclusion: alternative explanations, how much bias would explain it away, other defensible choices, fragility, code errors; reports which attacks succeed and the narrowest claim that survives |
 
 ### lang-r
 
