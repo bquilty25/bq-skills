@@ -108,7 +108,7 @@ and are not tracked here.
 | Plugin | Skills | Description |
 |---|---|---|
 | `personal` | 6 | Own skills: writing, diagrams, Quarto reports and decks, refactoring |
-| `research-academic` | 10 | Paper analysis, literature search, preprints, grants, minutes, analysis critique, red team |
+| `research-academic` | 9 | Paper analysis, literature search, preprints, grants, minutes, analysis critique |
 | `lang-r` | 1 | R package development (devtools, testthat, roxygen2) |
 | `lang-julia` | 1 | Julia package development (SciML standards) |
 | `lang-stan` | 1 | Stan probabilistic programming (cmdstanr) |
@@ -120,7 +120,7 @@ and are not tracked here.
 | `pi` | 1 | Delegate tasks to a local coding agent |
 | `claude-imported` | 26 | Skills imported from Posit, r-lib, Quarto, Shiny and others |
 
-**Total: 86 skills across 12 plugins**
+**Total: 85 skills across 12 plugins**
 
 ## All skills
 
@@ -147,8 +147,7 @@ and are not tracked here.
 | `/grant-application-setup` | Set up grant application repositories |
 | `/grant-compliance-checking` | Check work against grant requirements |
 | `/minutes` | Create meeting minutes from a transcript |
-| `/analysis-critique` | A senior professor reviews an analysis, report or deck: issues ranked by how much they could change the conclusion, each with the check that would settle it |
-| `/red-team` | Try to break an analysis's main conclusion: alternative explanations, how much bias would explain it away, other defensible choices, fragility, code errors; reports which attacks succeed and the narrowest claim that survives |
+| `/analysis-critique` | A senior professor reviews an analysis, report or deck and tries to break its main conclusion: issues and successful attacks ranked by how much they could change the conclusion, each with the check that would settle it, and the narrowest claim that survives |
 
 ### lang-r
 
