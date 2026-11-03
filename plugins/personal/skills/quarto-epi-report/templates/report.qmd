@@ -14,6 +14,8 @@ format:
         <style>
           body { font-size: 1.1rem; }
           a, a:visited, a.quarto-xref { color: #1f5bb5 !important; }
+          /* captions and muted text dark, not the template's light blue */
+          figcaption, .quarto-float-caption, .figure-caption, caption, .text-muted { color: #333333 !important; }
           h1.title { font-size: 2rem !important; line-height: 1.2 !important; }
           .subtitle, p.subtitle { font-size: 1.05rem !important; line-height: 1.4 !important; }
           .quarto-title-banner { padding-top: 1rem !important; padding-bottom: 1rem !important; }

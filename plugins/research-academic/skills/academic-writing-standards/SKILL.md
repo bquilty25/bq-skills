@@ -57,6 +57,23 @@ Hedged: "It appears that the results seem to suggest that there might be a relat
 Direct: "The results suggest a relationship"
 ```
 
+**Avoid framing sentences.** State the finding, then what follows from it,
+as a researcher would say it. Do not announce what something defines,
+measures, shows or tests, do not use a colon to reveal the point, and do not
+build sentences on "X, not Y". Conditionals ("If ..., ...") are fine where
+they read naturally.
+
+```
+Framed: "Which registries the links come from, and when the doses were given, define what VE from the registry link measures: protection from doses given in earlier campaigns, not from any dose since."
+Natural: "Most links were to the registry of the 2018 to 2020 campaigns, so VE from the registry link refers mainly to doses given then."
+
+Framed: "The definitions of a link test the two errors of a linkage."
+Natural: "False links bias VE towards no effect, and counting only the most certain links removes most of them."
+
+Framed: "Whether cases and controls had the identifiers the linkage needs was assessed for the DHIS2 linkage only: among all suspects..."
+Natural: "Only for the DHIS2 linkage did we check whether cases and controls had the identifiers the linkage needs; among all suspects..."
+```
+
 ### Punctuation Simplification
 
 **Avoid semicolons** when possible:

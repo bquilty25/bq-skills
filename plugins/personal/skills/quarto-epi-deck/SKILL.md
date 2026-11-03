@@ -87,7 +87,9 @@ cited). In addition:
 - **Three to five bullets,** each one line or two at most, with only the
   numbers the finding rests on: the headline estimate with its interval and,
   where it matters, one contrast. Bullets are fine on slides (unlike
-  reports), in UK English, without em dashes.
+  reports), in UK English, without em dashes. Write them as plain
+  statements of the finding, not framed with a colon reveal or "X, not Y"
+  (see `academic-writing-standards`).
 - **One figure per slide,** below the bullets, sized for the slide area:
   `fig-width: 13` and `fig-height` from about 3.4 to 4.6 depending on the
   bullets above it. Base size 14; labels at the right of dot plots need

@@ -211,7 +211,12 @@ be labelled unpublished. Use the project's citation style and bibliography
 file.
 
 **Register**: plain, measured and specific. No rhetorical questions,
-dramatic openers or figurative phrasing; no em dashes. Write for the
+dramatic openers or figurative phrasing; no em dashes. No framing
+sentences: state the finding and what follows from it, rather than
+announcing what an analysis defines, measures, shows or tests, revealing
+the point after a colon, or building on "X, not Y" (see
+`academic-writing-standards`). Conditionals are fine where they read
+naturally. Write for the
 report's stated audience: for readers outside the team, define terms and do
 not mention scripts, file names of code, internal people or internal
 process.
