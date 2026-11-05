@@ -1,6 +1,6 @@
 ---
 name: diagram-design
-description: Design language for hand-authored SVG schematics such as study-design diagrams, participant flow and eligibility funnels, follow-up timelines, and side-by-side method comparisons in epidemiology and analysis documents. Use when asked to draw, diagram or visualise a study design, analysis pipeline, cohort timeline, matching scheme or flow, for a report, Quarto document, analysis plan or slide. For data charts (plots, axes, palettes for series) use the bundled dataviz skill instead; this skill covers schematics with boxes, arrows, markers and annotations.
+description: Design language for hand-authored SVG schematics such as study-design diagrams, participant flow and eligibility funnels, follow-up timelines, side-by-side method comparisons and schematic explainers of a model (for example a latent class or misclassification model, drawn with individuals and records rather than prose) in epidemiology and analysis documents. Use when asked to draw, diagram or visualise a study design, analysis pipeline, cohort timeline, matching scheme or flow, for a report, Quarto document, analysis plan or slide. For data charts (plots, axes, palettes for series) use the bundled dataviz skill instead; this skill covers schematics with boxes, arrows, markers and annotations.
 ---
 
 # Diagram design language
@@ -16,6 +16,9 @@ Hand-written SVG schematics that read as one family with the project's ggplot fi
 5. **Never rely on colour alone.** Excluded items are dashed and faded, events have distinct marker shapes, and everything important is also labelled in text.
 6. **Label directly.** Put labels next to the thing. Use a legend only for marks that repeat, in a single white strip.
 7. **End with the model.** Diagrams of an analysis close with a footer box stating the estimand or formula (VE = 1 − OR) and what is and is not adjusted.
+8. **Schematic, not prose.** Show the mechanism with marks: circles for individuals, small icons for records (a pill for what someone said, a ticked or dashed card for a registry record), filled or faded dots for status. Text is short labels, at most a bold label and one or two muted lines per row. A box holding a paragraph is a sign to turn it into marks.
+9. **Arrows follow the reader's reasoning.** In an explainer of an analysis, arrows run from what is observed, to what is estimated, to the result. Draw them in the generative direction (true status causes the records), as in a DAG, only when the diagram is a causal diagram and says so.
+10. **Emphasise the crux.** Highlight the row, path or box the result depends on most (a tinted band and one accent-coloured line saying what it assumes), so the viewer sees where the conclusion could break.
 
 ## Canvas and type
 
@@ -113,6 +116,7 @@ If a project's plots use another palette, swap the hexes but keep the roles.
 2. **Current versus proposed (method comparison).** Two panels at x 40 and 470, each 390 wide, with identical example data so only the method differs. Each panel has a bold heading, a muted one-line scope, the example area, then a four-line paragraph on how it works and its cost. Below come a shared legend strip and a dated footnote with the real-data consequence ("1:1 matching kept 800 of 1,178").
 3. **Follow-up timeline.** Row labels on the left (x 40–220), the pre-origin zone, then shaded model bands on a linear scale (20 px per day worked well for 28 days). Below sit the axis, legend strip and model box.
 4. **Funnel with exclusions.** Main column at x 60–400 with counts in bold node text. Exclusions sit in a right-hand white card at x 470–860, with right-aligned counts (`text-anchor="end"`), group rules between steps and dashed arrows from the step they leave. Alternative definitions are small side-by-side boxes, with the current choice flagged in blue. A highlighted sub-flow card covers the subgroup that matters (for example, vaccinated cases).
+5. **Records to latent status (measurement model).** For a model that infers an unobserved quantity from imperfect records (latent class models, misclassification corrections). A table of archetype rows, one per combination of the records: on the left an icon per record (x 60–190), a short arrow, then a circle for the estimated status whose inner dot's opacity shows how likely it is (solid: certain; faded: likely; nearly clear: unlikely), with a bold label and one muted line saying why. Counts per row sit in right-hand columns by group (controls, cases) under a muted "Patients" heading. Tint the row the result depends on. Below, two groups of illustrative individuals (role-coloured rings, dot for the estimated status) compared to give the estimand, an arrow into the result box, and a footer with the estimate, the uncorrected estimate and the key assumption. Reference: `qmd/img/templates/latent_class_model.svg` in the EVD-COD17-ve-retro repository.
 
 ## Content audit
 
@@ -127,10 +131,12 @@ Run this audit before calling a diagram finished; a diagram can be clean and sti
 7. **Undocumented is said, not guessed.** Where the source does not say how something is handled, write "not documented" rather than inventing the rule.
 8. **Dependence is flagged.** If one person can enter both analyses, the estimates are not independent; say so.
 9. **Gaps against the plan are visible.** If the current practice omits a planned step, show it as a flagged note (accent colour) rather than leaving it out.
+10. **Claims about what drives a result are checked.** Before writing "rests on the prior" or "driven by X", read the sensitivity analyses that vary X. If the result does not move when X changes, X is not the driver: name the assumption that is (for example, independence of the two records' errors).
+11. **Illustrative marks are labelled and consistent.** Example individuals that stand for a model are labelled "illustrative", and their proportions roughly reproduce the estimate they lead to, so the picture never contradicts the number beside it.
 
 ## Diagrams that show results
 
-If a diagram carries numbers produced by an analysis (estimates, coverage, counts from a run), do not type them into the SVG. Keep a template with `{{key}}` placeholders (for example in `docs/figures/templates/`), and fill it from the output tables in the pipeline step that produces them. Have the filler stop if a placeholder lacks a value or a value lacks a placeholder. Hand-typed results go stale on the next run; the Ervebo repository's `diagram_functions.R` is a worked example.
+If a diagram carries numbers produced by an analysis (estimates, coverage, counts from a run), do not type them into the SVG. Keep a template with `{{key}}` placeholders (for example in `docs/figures/templates/`), and fill it from the output tables in the pipeline step that produces them. Have the filler stop if a placeholder lacks a value or a value lacks a placeholder. Hand-typed results go stale on the next run; the Ervebo repository's `diagram_functions.R` is a worked example. Where results may not be committed (sensitive data), commit only the template and the filler, and write the filled diagram to the project's ignored results folder (for example `output/figures/`); EVD-COD17-ve-retro's `R/diagrams.R` and `scripts/reports/fill_diagrams.R` do this. Fixed settings such as a prior's parameters may be typed; anything estimated or counted is a placeholder.
 
 ## Workflow
 
@@ -148,7 +154,9 @@ If a diagram carries numbers produced by an analysis (estimates, coverage, count
    - a row label colliding with the first mark;
    - legend items running together.
 5. Re-render after each fix.
-6. Save to `docs/figures/` and embed:
+6. Critique, then iterate, at least twice before showing anyone. On each render, write down the problems before fixing them: empty space (long arrows carrying nothing) while labels are cramped; the crux not standing out; text that repeats something already shown; duplicated keys; numbers without a unit or heading; any claim the results do not support (run the content audit). Fix them, re-render and look again. Tell the user what each round changed.
+7. If a project hook blocks reading the results folder, render the PNG preview into a scratch directory and view that; never work around the hook to read the data themselves.
+8. Save to `docs/figures/` and embed:
    - Markdown: `![caption](figures/x.svg)`
    - Quarto: `![Caption sentence.](../docs/figures/x.svg){#fig-x}`
 
