@@ -1,9 +1,9 @@
 ---
 name: quarto-epi-report
-description: How to build an Epicentre (MSF) epidemiological analysis report in Quarto from start to finish, the way the user wants every time - an analysis script that saves aggregate results, a report that only reads them, the Epicentre epitemplates report formats, text helpers for the few numbers each claim needs, tables and figures whose captions say who each group holds, IMRaD prose with a fixed structure, and checks of the render before calling it done. Use when creating a new Quarto report, adding a section, table or figure to one, or restructuring one. For slide decks use quarto-epi-deck. Builds on quarto-dynamic-reporting (inline numbers) and academic-writing-standards (prose).
+description: How to build an epidemiological analysis report in Quarto from start to finish, the way the user wants every time - an analysis script that saves aggregate results, a report that only reads them, standard Quarto HTML and Word formats, text helpers for the few numbers each claim needs, tables and figures whose captions say who each group holds, IMRaD prose with a fixed structure, and checks of the render before calling it done. Use when creating a new Quarto report, adding a section, table or figure to one, or restructuring one. For slide decks use quarto-epi-deck. Builds on quarto-dynamic-reporting (inline numbers) and academic-writing-standards (prose).
 ---
 
-# Quarto epidemiological reports (Epicentre)
+# Quarto epidemiological reports
 
 A report is three files: functions in `R/<topic>.R`, an analysis script in
 `scripts/<topic>.R` that computes and saves aggregates, and a `.qmd` under
@@ -13,7 +13,7 @@ and reads the same results.
 
 **Start every new report from `templates/report.qmd` in this skill's
 folder**: copy it to `qmd/<topic>/<topic>.qmd` and replace each `<...>`. It
-holds the Epicentre front matter, the setup chunk with the formatting
+holds the front matter, the setup chunk with the formatting
 helpers and the results check, and the IMRaD skeleton with a table and a
 figure chunk. When adding to an existing report, follow that report instead. Also apply `quarto-dynamic-reporting`
 (every data-derived number is inline R) and `academic-writing-standards`
@@ -45,37 +45,25 @@ follow those too.
 - Number scripts or add an orchestrator only if the project already does.
   Update the README when adding a script or report.
 
-## 2. Epicentre format
+## 2. Format
 
-Reports use the Epicentre house style from the
-[`epitemplates`](https://github.com/epicentre-msf/epitemplates) Quarto
-extension, kept in `_extensions/epicentre-msf/` at the project root.
+Reports use standard Quarto formats unless the project already has its own
+house style, in which case follow the project's existing reports.
 
-- **Formats.** `epitemplates-report-html` (with `grid: body-width: 1000px`)
-  and `epitemplates-report-docx: default`.
-- **Front matter of a report**, as in the project's existing reports: title
-  (no commas), a subtitle that ends "Epicentre, Paris", `footer: Epicentre -
-  Médecins Sans Frontières`, `date: last-modified` with `date-format: long`,
-  `toc: true`, `number-sections: true`, the project bibliography and
-  `the-lancet.csl` (paths relative to the document), `execute: echo: false,
-  warning: false, message: false`, and `params` for the results date
-  (`res_date: "latest"`) and folder. Copy the `include-in-header` style block
-  (body font size, link colour, title sizes) from an existing report.
-- **Render list.** Every report is listed in the render list of
-  `_quarto.yml`; documents in a subfolder find the Epicentre format only
-  when listed. Sharing (e.g. to SharePoint) is a separate list; add a
-  document to it only when the user asks.
-- **Font and figures.** Text in figures uses the template font through
-  showtext (`knitr::opts_chunk$set(fig.showtext = TRUE)` and the project's
-  font helper, e.g. `epi_font()`), and forest plots use the project's helper
-  (e.g. `forest_ve()`), so figures match across reports and decks.
-- **Colours.** Epicentre orange (`#eb6834`) and blue (`#5b7fa6`, header
-  blue `#2E569E`) for the two main series (datasets or exposures), greys for
-  reference groups; keep one colour per series across a report and its
-  deck.
+- **Formats.** `html` (self-contained, `embed-resources: true`) and, where
+  the reader needs Word, `docx`.
+- **Front matter**: title (no commas), a one-line subtitle, `date:
+  last-modified` with `date-format: long`, `toc: true`, `number-sections:
+  true`, the project bibliography and a citation style (paths relative to
+  the document), `execute: echo: false, warning: false, message: false`,
+  and `params` for the results date (`res_date: "latest"`) and folder.
+- **Render list.** Where the project has a `_quarto.yml` render list, add
+  the report to it. Share a document only when the user asks.
+- **Figures** use the project's figure helpers where they exist, so figures
+  match across reports and decks. Keep one colour per series across a
+  report and its deck, and greys for reference groups.
 - **Word output** must open without repair; where the project post-processes
-  the docx (e.g. `scripts/fix_docx.R` as a post-render step), keep it in
-  place.
+  the docx, keep that step in place.
 
 ## 3. Setup chunk
 

@@ -1,26 +1,14 @@
 ---
-# Epicentre report template (quarto-epi-report). Replace every <...>, add the
-# document to the render list of _quarto.yml and its results prefix to the
-# project's registry of report dates, then delete these comments.
+# Report template (quarto-epi-report). Replace every <...>, add the document
+# to the render list of _quarto.yml (if the project has one) and its results
+# prefix to the project's registry of report dates (if any), then delete
+# these comments.
 title: "<Finding-led title without commas>"
-subtitle: "<What the report covers, in one line>. Epicentre, Paris"
-footer: Epicentre - Médecins Sans Frontières
+subtitle: "<What the report covers, in one line>"
 format:
-  epitemplates-report-html:
-    grid:
-      body-width: 1000px
-    include-in-header:
-      text: |
-        <style>
-          body { font-size: 1.1rem; }
-          a, a:visited, a.quarto-xref { color: #1f5bb5 !important; }
-          /* captions and muted text dark, not the template's light blue */
-          figcaption, .quarto-float-caption, .figure-caption, caption, .text-muted { color: #333333 !important; }
-          h1.title { font-size: 2rem !important; line-height: 1.2 !important; }
-          .subtitle, p.subtitle { font-size: 1.05rem !important; line-height: 1.4 !important; }
-          .quarto-title-banner { padding-top: 1rem !important; padding-bottom: 1rem !important; }
-        </style>
-  epitemplates-report-docx: default
+  html:
+    embed-resources: true
+  docx: default
 date: last-modified
 date-format: long
 toc: true
@@ -49,9 +37,8 @@ pacman::p_load(
   tidyverse
 )
 
-# Tables (epi_gt()) and figures (epi_font(), forest_ve()) in the template's
-# font. This document fits nothing and reads only the aggregate results of
-# scripts/<topic>/<topic>.R
+# Project table and figure helpers, where they exist. This document fits
+# nothing and reads only the aggregate results of scripts/<topic>/<topic>.R
 source(here("R", "report_tables.R"))
 source(here("R", "report_figures.R"))
 knitr::opts_chunk$set(fig.showtext = TRUE)

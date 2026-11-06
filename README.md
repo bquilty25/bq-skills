@@ -109,7 +109,7 @@ and are not tracked here.
 |---|---|---|
 | `personal` | 6 | Own skills: writing, diagrams, Quarto reports and decks, refactoring |
 | `research-academic` | 9 | Paper analysis, literature search, preprints, grants, minutes, analysis critique |
-| `lang-r` | 1 | R package development (devtools, testthat, roxygen2) |
+| `lang-r` | 2 | R package development; parallel analysis runs |
 | `lang-julia` | 1 | Julia package development (SciML standards) |
 | `lang-stan` | 1 | Stan probabilistic programming (cmdstanr) |
 | `dev-workflow` | 12 | Commits, linting, testing, review, PRs, docs, coverage, deps, scaffolding, tasks |
@@ -120,7 +120,7 @@ and are not tracked here.
 | `pi` | 1 | Delegate tasks to a local coding agent |
 | `claude-imported` | 26 | Skills imported from Posit, r-lib, Quarto, Shiny and others |
 
-**Total: 85 skills across 12 plugins**
+**Total: 87 skills across 12 plugins**
 
 ## All skills
 
@@ -131,7 +131,7 @@ and are not tracked here.
 | `/unslop` | Cut AI tells from any writing |
 | `/diagram-design` | Design language for hand-authored SVG schematics (study designs, flows, timelines) |
 | `/quarto-dynamic-reporting` | Inline R for every result in Quarto documents |
-| `/quarto-epi-report` | Build an Epicentre epidemiological Quarto report: results script, epitemplates formats, the few numbers each claim needs, captions that explain groups, fixed IMRaD structure, render checks |
+| `/quarto-epi-report` | Build an epidemiological Quarto report: results script, standard HTML and Word formats, the few numbers each claim needs, captions that explain groups, fixed IMRaD structure, render checks |
 | `/quarto-epi-deck` | Build an Epicentre slide deck in Quarto: PowerPoint in the Epicentre template, reads the report's results, one finding per slide, figures and tables sized for slides, take-home, render checks |
 | `/refactor` | Refactor to project standards without changing behaviour |
 
@@ -154,6 +154,7 @@ and are not tracked here.
 | Skill | Description |
 |---|---|
 | `/r-development` | R package development (devtools, testthat, roxygen2) |
+| `/r-parallel` | Use the machine's cores for R runs: core budget, forked workers dispatched largest first, chunking, chains per fit, seeds per job, thread limits, odin2/monty and Stan specifics |
 
 ### lang-julia
 
