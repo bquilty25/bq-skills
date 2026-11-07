@@ -103,7 +103,8 @@ before spending effort on it.
 6. **Errors.** Read the code that produces the headline number: joins that
    duplicate or drop rows, filters applied in the wrong order, reference
    levels, date arithmetic, results files from the wrong date, text that no
-   longer matches the numbers it describes.
+   longer matches the numbers it describes. For a full code-level check of
+   the pipeline, model code and report, use the analysis-code-review skill.
 7. **External plausibility.** Is the size of the effect consistent with
    prior evidence, biology and the other estimates in the same data? An
    effect larger than in randomised trials, or in a group where it should

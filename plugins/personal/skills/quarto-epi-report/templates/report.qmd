@@ -100,9 +100,29 @@ We used <dataset> uploaded on `r data_label` (`r src$<file>`).
 
 ## Study populations
 
+<For each sampling or recruitment group: how it was recruited, where and when, with a reference where one exists; say where the recruitment frame is unknown.>
+
 ## Statistical analysis
 
 # Results
+
+## Study population and data
+
+<Who was sampled and how the groups differ (@tbl-description); the raw outcomes or markers over time (@fig-data-time).>
+
+```{r}
+#| label: tbl-description
+#| tbl-cap: "<Who was sampled and what they showed, one row per sampling or recruitment group: n, collection dates, age, sex, key covariates, missing values and main outcomes, n (%) with denominators stated.>"
+# r$descriptive |> ... |> epi_gt(groupname_col = "<source>", notes = "<groups pooled or suppressed; definitions>")
+```
+
+```{r}
+#| label: fig-data-time
+#| fig-cap: "<Main outcomes or markers by collection period, all strata pooled, with exact 95% CI, next to the surveillance series the analysis uses; which groups are left out and why.>"
+#| fig-width: 9
+#| fig-height: 5
+# r$descriptive_time |> ggplot(...)
+```
 
 ## <First question>
 

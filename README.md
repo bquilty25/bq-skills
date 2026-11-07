@@ -148,6 +148,7 @@ and are not tracked here.
 | `/grant-compliance-checking` | Check work against grant requirements |
 | `/minutes` | Create meeting minutes from a transcript |
 | `/analysis-critique` | A senior professor reviews an analysis, report or deck and tries to break its main conclusion: issues and successful attacks ranked by how much they could change the conclusion, each with the check that would settle it, and the narrowest claim that survives |
+| `/analysis-code-review` | A senior research software engineer and biostatistician checks that the code behind an analysis (R pipeline, model code, Quarto report) computes the numbers the report states, reproducibly: headline numbers traced from raw file to inline R, cheap checks run, findings ranked by whether they change a reported number |
 
 ### lang-r
 

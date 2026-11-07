@@ -1,6 +1,6 @@
 ---
 name: quarto-epi-report
-description: How to build an epidemiological analysis report in Quarto from start to finish, the way the user wants every time - an analysis script that saves aggregate results, a report that only reads them, standard Quarto HTML and Word formats, text helpers for the few numbers each claim needs, tables and figures whose captions say who each group holds, IMRaD prose with a fixed structure, and checks of the render before calling it done. Use when creating a new Quarto report, adding a section, table or figure to one, or restructuring one. For slide decks use quarto-epi-deck. Builds on quarto-dynamic-reporting (inline numbers) and academic-writing-standards (prose).
+description: How to build an epidemiological analysis report in Quarto from start to finish, the way the user wants every time - an analysis script that saves aggregate results, a report that only reads them, standard Quarto HTML and Word formats, text helpers for the few numbers each claim needs, a descriptive table of who was sampled by recruitment group and a figure of the raw data over time before any model, tables and figures whose captions say who each group holds, IMRaD prose with a fixed structure, and checks of the render before calling it done. Use when creating a new Quarto report, adding a section, table or figure to one, or restructuring one. For slide decks use quarto-epi-deck. Builds on quarto-dynamic-reporting (inline numbers) and academic-writing-standards (prose).
 ---
 
 # Quarto epidemiological reports
@@ -14,8 +14,8 @@ and reads the same results.
 **Start every new report from `templates/report.qmd` in this skill's
 folder**: copy it to `qmd/<topic>/<topic>.qmd` and replace each `<...>`. It
 holds the front matter, the setup chunk with the formatting
-helpers and the results check, and the IMRaD skeleton with a table and a
-figure chunk. When adding to an existing report, follow that report instead. Also apply `quarto-dynamic-reporting`
+helpers and the results check, and the IMRaD skeleton with the descriptive
+table and data-over-time figure, then a table and a figure chunk. When adding to an existing report, follow that report instead. Also apply `quarto-dynamic-reporting`
 (every data-derived number is inline R) and `academic-writing-standards`
 (prose). Project memory may add terminology, audience and sharing rules;
 follow those too.
@@ -102,7 +102,45 @@ returns the claim with its counts, for example `"55% (46 of 83)"` or
   `stopifnot(all(confirmed < mean_posterior))` before writing "in every
   band, the share confirmed was below the mean posterior".
 
-## 4. Tables
+## 4. Describe the data first
+
+Every report starts its Results with the data themselves, before any
+model or adjusted estimate. Readers, and the analyst, need to see who was
+sampled and what the raw data show; differences between groups that a
+model assumes away (age, sex, period, site, recruitment route) are often
+the most important finding of the review.
+
+- **Descriptive table (Table 1).** One row per sampling or recruitment
+  group, not per analysis stratum: each source, site, cohort or collection
+  period that was recruited differently gets its own row, because pooling
+  hides the differences. Columns: number of people or samples, dates of
+  collection, age (median and IQR, and the share in the bands that matter
+  for the outcome), sex, other key covariates, missing values, and the
+  main outcomes or markers, each as n (%) with its denominator stated. Add
+  the combinations a model relies on (for example the share IgM positive
+  among IgG positives, or the share confirmed among tested).
+- **Data over time.** A figure of the main outcomes or markers by
+  collection period, all strata pooled, next to the surveillance counts or
+  other series the analysis uses, so the raw signal is visible before any
+  model.
+- **Computed in the analysis script** with generic functions
+  (`describe_groups(data, by = ...)`), from the line list, saving only
+  aggregates. The report never reads person-level data.
+- **Small cells.** Pool periods smaller than a set minimum (for example 10)
+  with a neighbour and say so in the caption. Suppress or leave out
+  summaries with fewer than 5 people, and any group that would describe a
+  single person; say what was left out in the notes.
+- **Methods** state, for each group, how it was recruited (population
+  survey, clinic, trial, outbreak investigation), with a reference where
+  one exists. Where the recruitment frame is unknown, say so, and list it
+  as a question for the data providers.
+- **Assert the totals**: in the analysis script, check that the group
+  counts add up to the rows of the cleaned data, so no group is silently
+  lost.
+- Any difference between groups that the model assumes away goes into
+  the limitations, with its likely direction of bias.
+
+## 5. Tables
 
 - Use the project's table helper (for example `epi_gt()`) with group rows
   for strata and a notes argument for definitions and abbreviations.
@@ -116,7 +154,7 @@ returns the claim with its counts, for example `"55% (46 of 83)"` or
 - Notes define every term, abbreviation and inclusion rule a reader needs
   to read the table alone.
 
-## 5. Figures
+## 6. Figures
 
 The caption must explain the groups. A reader who sees only the figure and
 its caption should know:
@@ -139,7 +177,7 @@ report. Prefer facets with explicit strips and `fct_rev()`d factors to
 control order. Size figures (`fig-width`, `fig-height`) for the number of
 rows they hold.
 
-## 6. Prose and structure
+## 7. Prose and structure
 
 IMRaD, UK English, prose paragraphs without bullets, first person plural.
 Results state findings only; interpretation goes in the Discussion. Number
@@ -158,7 +196,8 @@ populations and Statistical analysis (add or drop subsections only where
 the content needs it). Define every group, outcome, exposure and measure
 the Results use, including how unknown or missing values are handled.
 
-**Results**, one subsection per question. Each paragraph makes its claims
+**Results**, starting with a subsection describing the study population
+and data (section 4), then one subsection per question. Each paragraph makes its claims
 with the few numbers they rest on, and leaves the rest to its table or
 figure; the text reads as findings, not a table written out as prose.
 
@@ -209,7 +248,7 @@ report's stated audience: for readers outside the team, define terms and do
 not mention scripts, file names of code, internal people or internal
 process.
 
-## 7. Checks before calling it done
+## 8. Checks before calling it done
 
 1. Run the analysis script and confirm it exits cleanly.
 2. Render the report (skipping any automatic sharing while drafting) and
@@ -222,8 +261,11 @@ process.
    Rewrite or remove any claim the numbers do not support.
 5. Check figure and table captions against what the chunk actually plots,
    including the order and grouping of rows.
-6. Scan the prose for typed numbers that should be inline R, and for
+6. Confirm the descriptive table and the data-over-time figure are there,
+   that every sampling group appears, and that the descriptive table shows
+   no cell describing fewer than 5 people.
+7. Scan the prose for typed numbers that should be inline R, and for
    paragraphs that list more numbers than their claims need.
-7. Report to the user what the report contains, the definitions chosen
+8. Report to the user what the report contains, the definitions chosen
    that they may want to revisit, and anything not yet shared or
    committed.
