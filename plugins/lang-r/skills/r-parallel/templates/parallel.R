@@ -30,6 +30,15 @@ chains_per_fit <- function(n_fits, cores = n_cores(), min_chains = 4) {
   max(min_chains, floor(cores / n_fits))
 }
 
+#' Load the namespaces (and their compiled code) that the jobs will use,
+#' before forking. Loading a DLL for the first time inside a forked worker
+#' can segfault on macOS ("caught segfault ... dyn.load"), for example when
+#' brms loads rstan for nuts_params() or when posterior, bayesplot or
+#' cmdstanr are first used in a worker.
+par_preload <- function(pkgs) {
+  invisible(lapply(pkgs, loadNamespace))
+}
+
 #' Apply `f` to each element of `jobs` in forked workers, largest `size`
 #' first; results return in the order of `jobs`. Stops with the first worker
 #' error. Runs serially on Windows or when there is one worker or one job.

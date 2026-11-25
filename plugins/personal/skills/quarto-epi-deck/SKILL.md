@@ -89,7 +89,11 @@ cited). In addition:
   where it matters, one contrast. Bullets are fine on slides (unlike
   reports), in UK English, without em dashes. Write them as plain
   statements of the finding, not framed with a colon reveal or "X, not Y"
-  (see `academic-writing-standards`).
+  (see `academic-writing-standards`). Do not write "every x" ("every
+  interval includes 0", "under every prior") in bullets, slide titles,
+  figure labels, captions or diagram text: it reads as an AI-ism. Write
+  "all intervals include 0", "under all priors", "each true VE", or name
+  the number ("all three measures").
 - **One figure per slide,** below the bullets, sized for the slide area:
   `fig-width: 13` and `fig-height` from about 3.4 to 4.6 depending on the
   bullets above it. Base size 14; labels at the right of dot plots need

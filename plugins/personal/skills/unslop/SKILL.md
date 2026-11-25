@@ -31,6 +31,7 @@ Rule numbers are stable ids that other skills cite. A removed rule leaves a gap.
 10. **Rule of three.** Forcing ideas into groups of three. Use the natural number.
 11. **Synonym cycling.** Protagonist, main character, central figure, hero all in one paragraph. Pick one, repeat it.
 12. **False ranges.** "from X to Y" where X and Y aren't on a meaningful scale. List topics directly.
+12a. **"Every x".** "every interval includes 0", "under every prior", "every patient". Use "all" with a plural, "each" where one at a time is meant, or the number ("all three").
 
 ### Style
 

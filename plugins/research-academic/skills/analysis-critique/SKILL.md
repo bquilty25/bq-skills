@@ -1,6 +1,6 @@
 ---
 name: analysis-critique
-description: Critique an analysis, report or deck as a senior professor of epidemiology would before it goes to a journal, a funder or a policy committee, and try to break its main conclusion as a hostile reviewer would - question, design, selection, measurement, confounding, model choice, precision, interpretation and reporting, then alternative explanations, how much bias would explain the result away, other defensible choices, fragility and code errors. Issues are ranked by how much each could change the conclusion, each with the check that would settle it, ending with the narrowest claim that survives. Use when asked to critique, review, red-team or stress-test an analysis, before sharing results, when a result looks too good, or to decide what to improve next.
+description: Critique an analysis, report or deck as a senior professor of epidemiology would before it goes to a journal, a funder or a policy committee, and try to break its main conclusion as a hostile reviewer would - question, design, selection, measurement, confounding, model choice, precision, interpretation and reporting, then alternative explanations, how much bias would explain the result away, other defensible choices, fragility and code errors. Issues are ranked by how much each could change the conclusion, each with the check that would settle it, ending with suggested wording of the conclusion. Use when asked to critique, review, red-team or stress-test an analysis, before sharing results, when a result looks too good, or to decide what to improve next.
 ---
 
 # Analysis critique
@@ -113,7 +113,7 @@ before spending effort on it.
 ## 4. Output
 
 Start with a short **verdict**: does the claim survive (survives, survives
-with a narrower claim, or does not survive), would the analysis convince
+if worded more cautiously, or does not survive), would the analysis convince
 the stated audience, and what single change would most improve it?
 
 Then the issues, review findings and successful attacks together, **ranked
@@ -140,8 +140,10 @@ End with:
   these belong in the report as robustness.
 - **What is done well**, briefly, so it is kept.
 - **Questions for the authors** that the materials cannot answer.
-- **The narrowest claim that survives**, worded as it should appear in the
-  report, and the result that would make it stronger or untenable.
+- **Suggested wording of the conclusion**: how the report should state the
+  main finding given the critique, as one or two sentences in the report's
+  own register, and the result that would make it stronger or untenable.
+  Do not label this "the narrowest claim" or similar.
 
 Write in plain UK English, without flattery, rhetoric or hedging of the
 findings. Offer to save the critique (e.g.

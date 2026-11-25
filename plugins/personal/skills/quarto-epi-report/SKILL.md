@@ -61,7 +61,12 @@ house style, in which case follow the project's existing reports.
   the report to it. Share a document only when the user asks.
 - **Figures** use the project's figure helpers where they exist, so figures
   match across reports and decks. Keep one colour per series across a
-  report and its deck, and greys for reference groups.
+  report and its deck, and greys for reference groups. Colours must be
+  safe for colour-vision deficiency: use the Okabe–Ito palette (or the
+  project's palette if it passes the check in the `diagram-design` skill),
+  never red against green as the only difference between groups, and give
+  each pair the reader must compare a second cue (shape, fill, line type
+  or a direct label).
 - **Word output** must open without repair; where the project post-processes
   the docx, keep that step in place.
 
@@ -218,7 +223,11 @@ every table and figure in the sentence that uses it. Vary sentence length; a mix
 as long as each is easy to follow. Avoid long semicolon chains with inline
 R fragments spliced in; keep a conditional inline result as a whole
 sentence rather than a mid-sentence fragment. Every sentence says which
-estimate it means; never "the estimate" or "it" across sentences.
+estimate it means; never "the estimate" or "it" across sentences. Do not
+write "every x" in text, captions, notes or labels ("every interval
+included 0", "every patient tested"): it reads as an AI-ism. Write "all
+intervals included 0", "all patients tested", "each" where one at a time
+is meant, or the number.
 
 **Discussion**, in this order:
 

@@ -76,6 +76,13 @@ cores. A fit using 8 chains on a 16-core machine wastes half of it.
   with every time point) makes the parent the bottleneck.
 - **Stop on the first failure**: `mclapply` returns `try-error` objects
   silently; `par_map()` checks and stops with the first error.
+- **Load compiled packages before forking.** A worker that loads a
+  package's DLL for the first time can segfault on macOS (`caught segfault
+  ... dyn.load` in the worker, then `try-error` for every job). Call
+  `par_preload()` in the parent with every package the jobs touch,
+  including those loaded indirectly: for brms with cmdstanr, `c("brms",
+  "cmdstanr", "posterior", "rstan", "bayesplot")`, because
+  `brms::nuts_params()` loads rstan.
 
 ## 4. Reproducibility
 
@@ -110,6 +117,16 @@ size threads x workers to the budget.
   for chains within a fit; for several fits at once, fork fits with
   `floor(cores / chains)` workers, as in
   `EVD-COD17-ve-retro/R/parallel.R`.
+- **brms**: pass `cores = chains` to `brm()` and fork fits with
+  `par_map(..., workers = floor(n_cores() / chains))`, after
+  `par_preload()`. Give each fit its own compile directory
+  (`stan_model_args = list(dir = tempfile())`, created first): forked
+  workers share the parent's `tempdir()`, and two workers compiling the
+  same Stan code there at once overwrite each other's executable, which
+  fails as "Fitting failed. Unable to retrieve the metadata". Return
+  posterior summaries and the draws needed downstream, never the
+  `brmsfit`: it holds the data, which may be person-level, and is large to
+  copy back.
 - **Quarto reports** fit nothing; parallelism belongs in the analysis
   scripts.
 

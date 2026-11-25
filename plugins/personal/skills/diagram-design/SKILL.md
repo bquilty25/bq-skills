@@ -13,10 +13,10 @@ Hand-written SVG schematics that read as one family with the project's ggplot fi
 2. **Real numbers, with their source and date.** Counts come from the actual data cut and are cited in the subtitle or footer ("MSF linelist, compilation of 26 September 2026").
 3. **Encoding is constant across a project.** The same colour, shape and line style mean the same thing in every diagram and match the plot palette.
 4. **Two attributes compose on one mark.** Use ring colour for role (case or control) and an inner dot for exposure (vaccinated). This avoids a combinatorial legend.
-5. **Never rely on colour alone.** Excluded items are dashed and faded, events have distinct marker shapes, and everything important is also labelled in text.
+5. **Never rely on colour alone, and keep colours safe for colour-vision deficiency.** Use the Okabe–Ito accents below. Excluded items are dashed and faded, events have distinct marker shapes, and everything important is also labelled in text, so a reader who cannot tell two colours apart still reads the diagram (see "Colour-vision deficiency" under Colour).
 6. **Label directly.** Put labels next to the thing. Use a legend only for marks that repeat, in a single white strip.
 7. **End with the model.** Diagrams of an analysis close with a footer box stating the estimand or formula (VE = 1 − OR) and what is and is not adjusted.
-8. **Schematic, not prose.** Show the mechanism with marks: circles for individuals, small icons for records (a pill for what someone said, a ticked or dashed card for a registry record), filled or faded dots for status. Text is short labels, at most a bold label and one or two muted lines per row. A box holding a paragraph is a sign to turn it into marks.
+8. **Schematic, not prose.** Show the mechanism with marks: circles for individuals, small icons for records (a pill for what someone said, a ticked or dashed card for a registry record), filled or faded dots for status. Text is short labels, at most a bold label and one or two muted lines per row. A box holding a paragraph is a sign to turn it into marks. Do not write "every x" in labels or notes ("every patient", "every link was confirmed"): it reads as an AI-ism. Write "all patients", "all links were confirmed", or "each" where one at a time is meant.
 9. **Arrows follow the reader's reasoning.** In an explainer of an analysis, arrows run from what is observed, to what is estimated, to the result. Draw them in the generative direction (true status causes the records), as in a DAG, only when the diagram is a causal diagram and says so.
 10. **Emphasise the crux.** Highlight the row, path or box the result depends on most (a tinted band and one accent-coloured line saying what it assumes), so the viewer sees where the conclusion could break.
 
@@ -55,24 +55,42 @@ Hand-written SVG schematics that read as one family with the project's ggplot fi
 
 ### Semantic accents
 
-Each accent is a stroke with a matching tint fill. They match the ggplot figure palette.
+Each accent is a stroke with a matching tint fill, taken from the Okabe–Ito palette, which stays distinguishable under the common forms of colour-vision deficiency. They match the ggplot figure palette.
 
 | Accent | Stroke | Tint | Meaning in the reference set |
 |---|---|---|---|
-| Blue | `#2a78d6` | `#e8f0fb` | proposed or harmonised method, exposure (vaccinated), eligible set, the TND panel |
-| Orange | `#eb6834` | `#fde5d9` | cases, test-positive, the death-outcome study |
-| Green | `#1baf7a` | `#dcefe7` | controls, test-negative, admission |
+| Blue | `#0072B2` | `#e0edf6` | proposed or harmonised method, exposure (vaccinated), eligible set, the TND panel |
+| Vermillion | `#D55E00` | `#f9e7d9` | cases, test-positive, the death-outcome study |
+| Bluish green | `#009E73` | `#d9f0e9` | controls, test-negative, admission |
 
 ### Event markers (timelines only)
 
+Each event has its own shape as well as its own colour, so events stay distinct without colour.
+
 | Event | Colour | Shape |
 |---|---|---|
-| Onset | `#7b6fb3` | circle |
-| Death | `#d6338a` | square |
-| Transfer or censoring | `#f2b33d` | square |
-| Discharge | `#7b6fb3` | square |
+| Onset | `#56B4E9` | circle |
+| Death | `#CC79A7` | square |
+| Transfer or censoring | `#E69F00` | diamond |
+| Discharge | `#56B4E9` | triangle |
 
-If a project's plots use another palette, swap the hexes but keep the roles.
+If a project's plots use another palette, swap the hexes but keep the roles, and check the new palette as below.
+
+### Colour-vision deficiency
+
+About 1 in 12 men has a red-green deficiency, so a palette must work for them as well as in greyscale print.
+
+- **Avoid red against green and orange against green as the only difference** between two groups the reader must compare (cases and controls, vaccinated and unvaccinated). The Okabe–Ito vermillion and bluish green differ in lightness as well as hue; a red and a mid-green of equal lightness merge.
+- **Add a second cue to each pair that matters**: a filled against an open mark, a solid against a dashed line, a different marker shape, or a direct text label. Role (case or control) is also given by the label of the row or group, never by ring colour alone.
+- **Keep text in ink or muted grey.** Coloured text is for accent subheadings only, and a subheading in an accent colour also says in words what it marks.
+- **Check before delivering.** Simulate the palette with `colorspace::deutan()`, `protan()` and `tritan()` in R and compute the CIELAB distance (ΔE) between each pair of colours shown together. Aim for ΔE of at least 30 under deutan and protan for the pairs the reader must tell apart; below 20, two colours read as one, so add a second cue or change one of them.
+
+```r
+library(colorspace)
+pal <- c(case = "#D55E00", control = "#009E73", vacc = "#0072B2")
+de <- \(p) round(as.matrix(dist(as(hex2RGB(p), "LAB")@coords)))
+lapply(list(deutan = deutan(pal), protan = protan(pal), tritan = tritan(pal)), de)
+```
 
 ## Marks
 

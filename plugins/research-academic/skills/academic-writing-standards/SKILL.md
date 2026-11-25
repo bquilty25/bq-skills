@@ -74,6 +74,47 @@ Framed: "Whether cases and controls had the identifiers the linkage needs was as
 Natural: "Only for the DHIS2 linkage did we check whether cases and controls had the identifiers the linkage needs; among all suspects..."
 ```
 
+**Avoid elliptical antitheses.** Do not balance what cannot be done against
+what could, joined by a semicolon or "but", with the second clause ending on
+a bare auxiliary ("would", "could", "can", "does") whose verb the reader must
+supply. The shape is built for rhythm, it usually closes a paragraph as a
+punchline, and it reads as AI-written. Say it once, in full, with its own
+verb.
+
+```
+Elliptical: "The data cannot tell these apart; the dates of the follow-up visits would."
+Elliptical: "The data cannot distinguish these explanations; records of the dates of the follow-up visits could."
+Natural: "Records of the dates of the follow-up visits would be needed to distinguish these explanations."
+
+Elliptical: "Self-report cannot date a dose; the registry can."
+Natural: "Only the registry link gives a date of vaccination."
+```
+
+**Avoid inverted negative clauses.** Do not make an inanimate noun the
+subject of a negated verb placed after its object, as in "whose accuracy no
+registry link confirms", "doses that no registry holds" or "deaths which no
+link informs". The inversion and the personified subject (a record that
+"confirms", a registry that "holds") read as AI-written. Use a plain passive
+or a direct statement with "not".
+
+```
+Inverted: "...depends on the reported exposures, whose accuracy no record confirms."
+Natural: "...depends on the reported exposures, which could not be checked against the records."
+
+Inverted: "participants recruited at the second site (whose samples no laboratory tested)"
+Natural: "participants recruited at the second site (whose samples were not tested)"
+```
+
+**Avoid "rests on".** Do not say that a result, an estimate or an
+analysis "rests on", "is resting on" or "rested on" something, or ask "what
+does the result rest on?". It reads as AI-written. Use "depends on", or state
+the fact directly.
+
+```
+AI-ism: "The general-population result rests on very few vaccinated cases."
+Natural: "The general-population result depends on very few vaccinated cases."
+```
+
 ### Punctuation Simplification
 
 **Avoid semicolons** when possible:
@@ -497,6 +538,11 @@ opening so no two consecutive paragraphs begin the same way.
 - "significantly" → Reserve for statistical significance
 - "novel", "new" → Show novelty through comparison, don't claim it
 - "state-of-the-art" → Demonstrate through benchmarking
+- "every x" ("every interval included 0", "under every prior", "every
+  patient") → an AI-ism; use "all" with a plural ("all intervals
+  included 0"), "each" where one at a time is meant, or the number
+  ("all three records"). Applies to text, captions, table notes, figure
+  labels and diagrams.
 
 ### Vague Language
 
